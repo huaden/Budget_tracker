@@ -1,0 +1,32 @@
+#Frontend React
+
+# Logs
+/budgetDisplayFrontend/logs
+/budgetDisplayFrontend/*.log
+/budgetDisplayFrontend/npm-debug.log*
+/budgetDisplayFrontend/yarn-debug.log*
+/budgetDisplayFrontend/yarn-error.log*
+/budgetDisplayFrontend/pnpm-debug.log*
+/budgetDisplayFrontend/lerna-debug.log*
+
+/budgetDisplayFrontend/node_modules
+/budgetDisplayFrontend/dist
+/budgetDisplayFrontend/dist-ssr
+/budgetDisplayFrontend/*.local
+
+# Editor directories and files
+/budgetDisplayFrontend/bud.vscode/*
+!/budgetDisplayFrontend.vscode/extensions.json
+/budgetDisplayFrontend/.idea
+/budgetDisplayFrontend/.DS_Store
+/budgetDisplayFrontend/*.suo
+/budgetDisplayFrontend/*.ntvs*
+/budgetDisplayFrontend/*.njsproj
+/budgetDisplayFrontend/*.sln
+/budgetDisplayFrontend/*.sw?
+
+
+#Backend Flask
+/flaskBackend/venv
+/flaskBackend/instance
+
