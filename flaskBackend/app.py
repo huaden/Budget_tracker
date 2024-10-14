@@ -48,7 +48,7 @@ def addPurchase():
 @app.route('/budget', methods=['GET'])
 def getPurchases():
     tableData = Purchases.query.all()
-    return jsonify([{'amount': purchase.amount, 'date': purchase.date, 'name': purchase.name} for purchase in tableData]), 200
+    return jsonify([{ 'amount': purchase.amount, 'date': purchase.date, 'name': purchase.name, 'id': purchase.id} for purchase in tableData]), 200
 
 
 
@@ -65,9 +65,10 @@ def delPurchases():
         return jsonify({'message': 'Error during deletion: ' + str(e)}), 500
     
 @app.route('/budget/<int:id>', methods=['DELETE'])
-def delSpecificPurchase():
+def delSpecificPurchase(id):
     try:
-        delData = Purchases.query(id).delete()
+        delData = Purchases.query.get(id)
+        db.session.delete(delData)
         db.session.commit()
         return jsonify({'message': f'{delData} tasks removed.'}), 200
     except Exception as e:
@@ -78,7 +79,7 @@ def delSpecificPurchase():
 
 
 @app.route('/budget/<int:id>', methods=['PATCH'])
-def updatePurchase():
+def updatePurchase(id):
     purchase = Purchases.query.get(id)
     if(purchase):
         data = request.json

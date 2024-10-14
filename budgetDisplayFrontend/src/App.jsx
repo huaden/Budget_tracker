@@ -3,15 +3,15 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import InputForm from './components/inputForm'
+import PurchaseCard from './components/purchaseCard'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [purchases, setPurchases] = useState([])
 
   const URL = 'http://127.0.0.1:5000/budget';
   
 
-  useEffect(() => {updatePurchases()}, []);
+  useEffect(() => {updatePurchases(); console.log(purchases)}, []);
 
   const updatePurchases = () => {
       fetch(URL, {
@@ -39,10 +39,34 @@ function App() {
   }
 
 
+
+
+  const handleEdit = (info) => {
+
+  }
+
+  const handleDel = (index) => {
+    console.log(`Id of thing to be deleted ${index}`)
+    const dataId = index;
+
+    const delURL = URL + "/" + dataId;
+
+    console.log(`Delete Url ${delURL}`);
+
+    fetch(delURL, {
+      method: 'DELETE'
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log("Error occured: ", error));
+
+  }
+
+
   return (
     <>
       <h1>Eventually Budget Planner</h1>
       <InputForm handleDataSubmit={handleDataSubmit}/>
+      <PurchaseCard purchases={purchases}  handleDel={handleDel} handleEdit={handleEdit} />
     </>
   )
 }
