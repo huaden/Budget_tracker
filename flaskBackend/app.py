@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="http://localhost:5173")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -83,12 +83,12 @@ def updatePurchase(id):
     purchase = Purchases.query.get(id)
     if(purchase):
         data = request.json
-        purchase.amount = data.amount
-        purchase.date = data.date
-        purchase.name = data.name
+        purchase.amount = data.get('amount', purchase.amount)
+        purchase.date = data.get('date', purchase.date)
+        purchase.name = data.get('name', purchase.name)
 
         db.session.commit()
-        return jsonify({'message': 'Purchase #{id} has been updated'}), 200
+        return jsonify({'message': 'Purchase has been updated'}), 200
     else:
         return jsonify({'message': 'That id is not in the table'}), 404
 

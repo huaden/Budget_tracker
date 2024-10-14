@@ -29,7 +29,8 @@ const PurchaseCard = (props) => {
                 {props.purchases.map((purchase, index) => {
                     
                     return (
-                    <Row key={purchase.id} handleDel={handleDel} handleEdit={handleEdit} purchase={purchase} id={purchase.id} displayNum={index + 1}/>)
+                    <Row key={purchase.id} handleDel={handleDel} handleEdit={handleEdit} 
+                    purchase={purchase} id={purchase.id} displayNum={index + 1}/>)
                 })}
             </tbody>
         </Table>

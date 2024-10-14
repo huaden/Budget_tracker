@@ -39,11 +39,11 @@ const InputForm = (props) => {
             <form>
                 <header>Enter Purchase Information</header>
                 <label htmlFor="name">Purchase Name: </label>
-                <input className="name" placeholder="Enter Name of Purchase" onChange={updateName} type="text" value={name}></input>
+                <input id="name" className="name" placeholder="Enter Name of Purchase" onChange={updateName} type="text" value={name}></input>
                 <label htmlFor="date">Date: </label>
-                <input className="date" onChange={updateDate} type="date" value={date}></input>
+                <input id="date" className="date" onChange={updateDate} type="date" value={date}></input>
                 <label htmlFor="price">Cost: </label>
-                <input className="price" onChange={updateAmount} type="number" value={amount}></input>
+                <input id="price" className="price" onChange={updateAmount} type="number" value={amount}></input>
 
                 <button type="submit" onClick={handleSubmit}>Submit Info</button>
             </form>

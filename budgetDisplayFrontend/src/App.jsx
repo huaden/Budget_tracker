@@ -33,8 +33,10 @@ function App() {
         date: info.date,
         name: info.name
       }) })
-      .then(response => console.log(response))
-      .then(updatePurchases())
+      .then(response => {
+        console.log(response); 
+        updatePurchases();
+      })
       .catch(error => console.log("Error occured: ", error));
   }
 
@@ -42,6 +44,26 @@ function App() {
 
 
   const handleEdit = (info) => {
+    console.log(`Id of thing to be updated ${info.id}`)
+    const dataID = info.id;
+
+    const patchURL = URL + "/" + dataID;
+
+    fetch(patchURL, {
+      method: 'PATCH',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: info.amount,
+        date: info.date,
+        name: info.name
+      })
+      }).then(response => {
+        console.log(response); 
+        updatePurchases();
+      }).then(data => updatePurchases())
+      .catch(error => console.log("Error Occured: ", error))
 
   }
 
@@ -56,7 +78,10 @@ function App() {
     fetch(delURL, {
       method: 'DELETE'
     })
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response); 
+      updatePurchases();
+    })
     .catch(error => console.log("Error occured: ", error));
 
   }
