@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_migrate import Migrate
+from sqlalchemy import func
 
 app = Flask(__name__)
 CORS(app, origins="http://localhost:5173")
@@ -31,6 +32,9 @@ def home():
     return "Welcome to the Flask Backend"
 
 
+
+
+
 #All 'POST' methods
 @app.route('/budget', methods=['POST'])
 def addPurchase():
@@ -51,6 +55,10 @@ def getPurchases():
     return jsonify([{ 'amount': purchase.amount, 'date': purchase.date, 'name': purchase.name, 'id': purchase.id} for purchase in tableData]), 200
 
 
+@app.route('/budget/money', methods=['GET'])
+def getMoneyValues():
+    tableData = db.session.query(func.sum(Purchases.amount)).scalar()
+    return jsonify({'amount': tableData})
 
 
 
