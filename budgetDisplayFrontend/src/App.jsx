@@ -4,9 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import InputForm from './components/inputForm'
 import PurchaseCard from './components/purchaseCard'
+import MoneyDisplay from './components/moneyDisplay'
 
 function App() {
   const [purchases, setPurchases] = useState([])
+  const [purValues, setPurValues] = useState(0)
 
   const URL = 'http://127.0.0.1:5000/budget';
   
@@ -19,6 +21,12 @@ function App() {
       })
       .then(response => response.json())
       .then(data => {console.log(data); setPurchases(data)})
+      .catch(error => console.log("Error Occured: ", error));
+      fetch(URL + '/money', {
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(data => {console.log(data); setPurValues(data.amount)})
       .catch(error => console.log("Error Occured: ", error));
   }
 
@@ -89,8 +97,11 @@ function App() {
 
   return (
     <>
-      <h1>Eventually Budget Planner</h1>
+      <MoneyDisplay curAmount={purValues}/>
+      <br></br>
+      <br></br>
       <InputForm handleDataSubmit={handleDataSubmit}/>
+      <br></br>
       <PurchaseCard purchases={purchases}  handleDel={handleDel} handleEdit={handleEdit} />
     </>
   )
